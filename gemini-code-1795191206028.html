@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mente Digital | Usa la IA sin perder tu esencia</title>
+  <style>
+    :root {
+      --verde-pastel: #a7f3d0;
+      --verde-oscuro: #065f46;
+      --amarillo-pastel: #fef08a;
+      --amarillo-oscuro: #854d0e;
+      --negro: #09090b;
+      --negro-suave: #141417;
+      --negro-borde: #27272a;
+      --texto: #f4f4f5;
+      --texto-tenue: #a1a1aa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--negro);
+      color: var(--texto);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Barra de progreso superior fija */
+    .progress-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 200;
+      background: rgba(9, 9, 11, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--negro-borde);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #18181b;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--verde-pastel), var(--amarillo-pastel));
+      transition: width 0.35s ease;
+    }
+
+    .nav-bar {
+      max-width: 1140px;
+      margin: auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--texto);
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--verde-pastel);
+      letter-spacing: 0.5px;
+    }
+
+    .brand span {
+      font-size: 0.72rem;
+      color: var(--amarillo-pastel);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--texto);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      border-color: var(--verde-pastel);
+      background: rgba(167, 243, 208, 0.12);
+      color: var(--verde-pastel);
+    }
+
+    .progress-badge {
+      background: var(--amarillo-pastel);
+      color: var(--negro);
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 7.5rem 1.5rem 4rem;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(167, 243, 208, 0.14), transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(254, 240, 138, 0.14), transparent 45%),
+        var(--negro);
+      border-bottom: 1px solid var(--negro-borde);
+    }
+
+    .hero-inner {
+      max-width: 980px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-block;
+      background: rgba(167, 243, 208, 0.15);
+      color: var(--verde-pastel);
+      border: 1px solid rgba(167, 243, 208, 0.4);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.8vw, 3.3rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 .verde { color: var(--verde-pastel); }
+    .hero h1 .amarillo { color: var(--amarillo-pastel); }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 2rem;
+      color: var(--texto-tenue);
+      font-size: 1.05rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.9rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.85rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-verde {
+      background: var(--verde-pastel);
+      color: var(--negro);
+    }
+
+    .btn-amarillo {
+      background: var(--amarillo-pastel);
+      color: var(--negro);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--texto);
+      border: 1px solid var(--negro-borde);
+    }
+
+    /* Secciones */
+    section {
+      max-width: 1140px;
+      margin: auto;
+      padding: 4.5rem 1.5rem;
+      border-bottom: 1px solid var(--negro-borde);
+    }
+
+    .section-head {
+      margin-bottom: 2.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--verde-pastel);
+    }
+
+    .section-head p {
+      color: var(--texto-tenue);
+      max-width: 620px;
+      margin-top: 0.35rem;
+    }
+
+    .step-tag {
+      background: var(--amarillo-pastel);
+      color: var(--negro);
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+    }
+
+    /* Pilares */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: var(--negro-suave);
+      border: 1px solid var(--negro-borde);
+      border-radius: 18px;
+      padding: 1.6rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--amarillo-pastel);
+    }
+
+    /* Imagen y Galería conectada */
+    .media-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.6rem;
+      align-items: start;
+    }
+
+    .visual-frame {
+      background: var(--negro-suave);
+      border: 1px solid var(--negro-borde);
+      border-radius: 18px;
+      padding: 1.2rem;
+    }
+
+    .visual-frame img,
+    .visual-frame video {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      background: #000;
+    }
+
+    .selector-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .pill-btn {
+      padding: 0.55rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--negro-borde);
+      background: var(--negro);
+      color: var(--texto);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+
+    .pill-btn.active {
+      background: var(--verde-pastel);
+      color: var(--negro);
+      border-color: var(--verde-pastel);
+    }
+
+    /* Reto interactivo */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .choice-btn {
+      text-align: left;
+      padding: 1.1rem;
+      border-radius: 14px;
+      border: 1px solid var(--negro-borde);
+      background: var(--negro);
+      color: var(--texto);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .choice-btn:hover {
+      border-color: var(--amarillo-pastel);
+      background: rgba(254, 240, 138, 0.08);
+    }
+
+    .feedback-box {
+      margin-top: 1.2rem;
+      padding: 1.1rem 1.3rem;
+      border-radius: 12px;
+      background: rgba(167, 243, 208, 0.12);
+      border-left: 4px solid var(--verde-pastel);
+      display: none;
+    }
+
+    /* Registro */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .field label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--verde-pastel);
+    }
+
+    .field input,
+    .field select {
+      padding: 0.8rem 0.95rem;
+      border-radius: 10px;
+      border: 1px solid var(--negro-borde);
+      background: var(--negro);
+      color: var(--texto);
+      font-size: 0.95rem;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--amarillo-pastel);
+    }
+
+    .registro-confirm {
+      margin-top: 1.3rem;
+      padding: 1.2rem;
+      border-radius: 14px;
+      background: rgba(254, 240, 138, 0.14);
+      border: 1px solid var(--amarillo-pastel);
+      color: var(--amarillo-pastel);
+      display: none;
+    }
+
+    .registered-list {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .registered-item {
+      background: var(--negro);
+      border: 1px solid var(--negro-borde);
+      padding: 0.85rem 1.1rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.2rem 1rem;
+      color: var(--texto-tenue);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE PROGRESO Y NAVEGACIÓN CONECTADA -->
+  <div class="progress-wrapper">
+    <div class="nav-bar">
+      <a href="#inicio" class="brand" onclick="setProgress(20, 'inicio')">
+        <!-- Logo SVG Mente Digital -->
+        <svg width="42" height="42" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="14" fill="#18181B" stroke="#A7F3D0" stroke-width="2"/>
+          <path d="M31 16C23.5 16 18 21.2 18 28C18 30.8 19 33.4 20.7 35.4C19.6 37.1 19 39.1 19 41.2C19 46.6 23.4 50 28.8 50H31V16Z" stroke="#FEF08A" stroke-width="2.6" fill="rgba(254,240,138,0.16)"/>
+          <path d="M33 16C40.5 16 46 21.2 46 28C46 30.8 45 33.4 43.3 35.4C44.4 37.1 45 39.1 45 41.2C45 46.6 40.6 50 35.2 50H33V16Z" stroke="#A7F3D0" stroke-width="2.6" fill="rgba(167,243,208,0.16)"/>
+          <path d="M32 16V9" stroke="#A7F3D0" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M32 11C32 8 36 7 38 9C36 11 33 11 32 11Z" fill="#A7F3D0"/>
+        </svg>
+        <div>
+          <strong>MENTE DIGITAL</strong>
+          <span>Usa la IA sin perder tu esencia</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#inicio" class="nav-link active" data-sec="inicio" onclick="setProgress(20, 'inicio')">1. Inicio</a>
+        <a href="#pilares" class="nav-link" data-sec="pilares" onclick="setProgress(40, 'pilares')">2. Pilares</a>
+        <a href="#multimedia" class="nav-link" data-sec="multimedia" onclick="setProgress(60, 'multimedia')">3. Imagen y Video</a>
+        <a href="#reto" class="nav-link" data-sec="reto" onclick="setProgress(80, 'reto')">4. Dilema IA</a>
+        <a href="#registro" class="nav-link" data-sec="registro" onclick="setProgress(100, 'registro')">5. Registro</a>
+        <span class="progress-badge" id="progress-label">Progreso: 20%</span>
+      </nav>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- 1. INICIO -->
+  <header class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="pill">PROYECTO SOCIAL · SALUD MENTAL Y USO RESPONSABLE DE LA IA</div>
+      <h1><span class="verde">Tecnología que te impulsa,</span> <span class="amarillo">no que te domina.</span></h1>
+      <p>
+        Campaña educativa para estudiantes de educación superior: aprende a usar la inteligencia artificial como apoyo académico y creativo sin descuidar tu bienestar emocional, tu criterio ni tu descanso.
+      </p>
+      <div class="btn-group">
+        <a href="#multimedia" class="btn btn-verde" onclick="setProgress(60, 'multimedia')">Ver Imagen y Video</a>
+        <a href="#reto" class="btn btn-amarillo" onclick="setProgress(80, 'reto')">Jugar Dilema Interactivo</a>
+        <a href="#registro" class="btn btn-outline" onclick="setProgress(100, 'registro')">Registrarme en la Campaña</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. PILARES -->
+  <section id="pilares">
+    <div class="section-head">
+      <div>
+        <h2>Pilares de Mente Digital</h2>
+        <p>La IA es una herramienta, no un reemplazo. Tu bienestar también es productividad.</p>
+      </div>
+      <span class="step-tag">PASO 2 DE 5</span>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>🌱 Autocuidado</h3>
+        <p>Cuida tu sueño, haz pausas lejos de las pantallas y evita el tecnoestrés. Ninguna entrega vale más que tu salud mental.</p>
+      </div>
+      <div class="card">
+        <h3>⚖️ Equilibrio</h3>
+        <p>Usa la IA para organizar ideas y estudiar con intención, sin caer en la dependencia ni compararte con resultados ajenos.</p>
+      </div>
+      <div class="card">
+        <h3>🧭 Autonomía</h3>
+        <p>Piensa primero, formula tus propias preguntas, contrasta información con fuentes confiables y explica lo aprendido con tus palabras.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SECCIÓN CONECTADA: IMAGEN DEL PROYECTO + REPRODUCTOR DE VIDEO -->
+  <section id="multimedia">
+    <div class="section-head">
+      <div>
+        <h2>Galería Visual y Video del Proyecto</h2>
+        <p>Cambia entre las vistas conectadas para inspeccionar la imagen del proyecto y reproducir el video de campaña.</p>
+      </div>
+      <span class="step-tag">PASO 3 DE 5</span>
+    </div>
+
+    <div class="selector-pills">
+      <button class="pill-btn active" onclick="switchMedia('afiche', this)">🖼️ Imagen del Proyecto</button>
+      <button class="pill-btn" onclick="switchMedia('video', this)">🎬 Reproducir Video</button>
+      <button class="pill-btn" onclick="switchMedia('ambos', this)">⚡ Ver Ambos Juntos</button>
+    </div>
+
+    <div class="media-layout" id="media-container">
+      <!-- Tarjeta de Imagen conectada -->
+      <div class="visual-frame" id="box-afiche">
+        <p style="font-size:0.85rem; color:var(--verde-pastel); font-weight:700; margin-bottom:0.6rem;">
+          AFICHE / PIEZA GRÁFICA: MENTE DIGITAL
+        </p>
+        <!-- Coloca tu imagen en la misma carpeta con el nombre "afiche-mente-digital.jpg" o ".png" -->
+        <img
+          id="project-image"
+          src="afiche-mente-digital.png"
+          alt="Afiche del proyecto Mente Digital: Tecnología que te impulsa, no que te domina"
+          onerror="this.style.display='none'; document.getElementById('img-fallback').style.display='block';"
+        />
+        <div id="img-fallback" style="display:none; padding:1.5rem; background:#09090b; border:1px dashed var(--amarillo-pastel); border-radius:12px;">
+          <strong style="color:var(--amarillo-pastel);">Vista previa conectada — Mente Digital</strong>
+          <p style="font-size:0.88rem; color:var(--texto-tenue); margin-top:0.4rem;">
+            "Tecnología que te impulsa, no que te domina. Usamos la IA con conciencia para aprender, crear y crecer con autonomía."
+          </p>
+          <p style="font-size:0.78rem; color:var(--verde-pastel); margin-top:0.6rem;">
+            Tip: Guarda tu imagen junto a este HTML como <code>afiche-mente-digital.png</code> para que aparezca automáticamente aquí.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Reproductor de Video -->
+      <div class="visual-frame" id="box-video">
+        <p style="font-size:0.85rem; color:var(--amarillo-pastel); font-weight:700; margin-bottom:0.6rem;">
+          REPRODUCTOR DE VIDEO · CAMPAÑA MENTE DIGITAL
+        </p>
+        <!-- Coloca tu video en la misma carpeta como "video-mente-digital.mp4" o carga uno desde tu PC -->
+        <video id="project-video" controls preload="metadata">
+          <source src="video-mente-digital.mp4" type="video/mp4" />
+          Tu navegador no soporta la reproducción de video HTML5.
+        </video>
+
+        <div style="margin-top:0.9rem; display:flex; flex-wrap:wrap; gap:0.6rem; align-items:center;">
+          <button class="btn btn-verde" style="padding:0.5rem 1rem; font-size:0.85rem;" onclick="toggleVideoPlay()">▶ / ⏸ Play-Pausa</button>
+          <label class="btn btn-outline" style="padding:0.5rem 1rem; font-size:0.85rem; cursor:pointer;">
+            📂 Cargar video local
+            <input type="file" accept="video/*" style="display:none;" onchange="loadLocalVideo(event)" />
+          </label>
+        </div>
+        <p style="font-size:0.78rem; color:var(--texto-tenue); margin-top:0.5rem;">
+          Puedes subir <code>video-mente-digital.mp4</code> a tu repositorio o seleccionar cualquier video desde tu dispositivo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. DILEMA INTERACTIVO -->
+  <section id="reto">
+    <div class="section-head">
+      <div>
+        <h2>Dilema Interactivo: ¿Pienso primero o consulto la IA?</h2>
+        <p>Elige una opción y observa cómo impacta en tu autonomía y bienestar estudiantil.</p>
+      </div>
+      <span class="step-tag">PASO 4 DE 5</span>
+    </div>
+
+    <div class="card">
+      <h3 id="dilema-pregunta">Situación: Tienes un trabajo de investigación y dudas sobre cómo empezar.</h3>
+      <div class="choice-grid">
+        <button class="choice-btn" onclick="responderDilema('A')">
+          <strong>Opción A</strong>
+          <p style="font-size:0.88rem; color:var(--texto-tenue); margin-top:0.3rem;">
+            Pido a la IA que haga todo el texto de inmediato para terminar rápido.
+          </p>
+        </button>
+        <button class="choice-btn" onclick="responderDilema('B')">
+          <strong>Opción B</strong>
+          <p style="font-size:0.88rem; color:var(--texto-tenue); margin-top:0.3rem;">
+            Anoto mis propias ideas primero, pido pistas a la IA y verifico las fuentes.
+          </p>
+        </button>
+      </div>
+      <div class="feedback-box" id="dilema-respuesta"></div>
+    </div>
+  </section>
+
+  <!-- 5. REGISTRO INTERACTIVO -->
+  <section id="registro">
+    <div class="section-head">
+      <div>
+        <h2>Registro a la Comunidad Mente Digital</h2>
+        <p>Regístrate para sumarte a la campaña y guardar tu compromiso de uso responsable de la IA.</p>
+      </div>
+      <span class="step-tag">PASO 5 DE 5</span>
+    </div>
+
+    <div class="card">
+      <form id="registro-form" onsubmit="registrarUsuario(event)">
+        <div class="form-grid">
+          <div class="field">
+            <label for="reg-nombre">Nombre completo *</label>
+            <input type="text" id="reg-nombre" placeholder="Ej. Alexandra Llontop" required />
+          </div>
+          <div class="field">
+            <label for="reg-correo">Correo institucional o personal *</label>
+            <input type="email" id="reg-correo" placeholder="ejemplo@correo.com" required />
+          </div>
+          <div class="field">
+            <label for="reg-rol">Perfil</label>
+            <select id="reg-rol">
+              <option value="Estudiante de Educación Superior">Estudiante de Educación Superior</option>
+              <option value="Docente / Mentor">Docente / Mentor</option>
+              <option value="Colaborador de la Campaña">Colaborador de la Campaña</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="reg-habito">Hábito que quieres fortalecer</label>
+            <select id="reg-habito">
+              <option value="Pensar antes de consultar la IA">Pensar antes de consultar la IA</option>
+              <option value="Verificar fuentes confiables">Verificar fuentes confiables</option>
+              <option value="Cuidar horas de sueño y pausas">Cuidar horas de sueño y pausas</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-verde" style="margin-top:1.3rem;">Completar Registro</button>
+      </form>
+
+      <div class="registro-confirm" id="registro-confirm"></div>
+      <div class="registered-list" id="registered-list"></div>
+    </div>
+  </section>
+
+  <footer>
+    Proyecto Social <strong>Mente Digital</strong> · Usa la IA sin perder tu esencia · NRC 3813[cite: 3, 4]
+  </footer>
+
+  <script>
+    function setProgress(percent, secId) {
+      document.getElementById('progress-fill').style.width = percent + '%';
+      document.getElementById('progress-label').textContent = 'Progreso: ' + percent + '%';
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.sec === secId);
+      });
+    }
+
+    function switchMedia(mode, btn) {
+      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const afiche = document.getElementById('box-afiche');
+      const video = document.getElementById('box-video');
+
+      if (mode === 'afiche') {
+        afiche.style.display = 'block';
+        video.style.display = 'none';
+      } else if (mode === 'video') {
+        afiche.style.display = 'none';
+        video.style.display = 'block';
+      } else {
+        afiche.style.display = 'block';
+        video.style.display = 'block';
+      }
+      setProgress(60, 'multimedia');
+    }
+
+    function toggleVideoPlay() {
+      const vid = document.getElementById('project-video');
+      if (vid.paused) {
+        vid.play().catch(() => {});
+      } else {
+        vid.pause();
+      }
+    }
+
+    function loadLocalVideo(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const vid = document.getElementById('project-video');
+      vid.src = URL.createObjectURL(file);
+      vid.play().catch(() => {});
+    }
+
+    function responderDilema(opcion) {
+      const box = document.getElementById('dilema-respuesta');
+      box.style.display = 'block';
+      if (opcion === 'A') {
+        box.style.borderLeftColor = 'var(--amarillo-pastel)';
+        box.innerHTML = `<strong style="color:var(--amarillo-pastel);">⚠️ Atención a la dependencia:</strong> Delegar todo el proceso puede generar inseguridad sobre tus propias capacidades y dejar errores sin detectar.`;
+      } else {
+        box.style.borderLeftColor = 'var(--verde-pastel)';
+        box.innerHTML = `<strong style="color:var(--verde-pastel);">✅ Uso responsable y autónomo:</strong> Mantienes tu criterio, usas la IA como apoyo y fortaleces tu aprendizaje real.`;
+      }
+      setProgress(80, 'reto');
+    }
+
+    function registrarUsuario(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('reg-nombre').value.trim();
+      const correo = document.getElementById('reg-correo').value.trim();
+      const rol = document.getElementById('reg-rol').value;
+      const habito = document.getElementById('reg-habito').value;
+
+      const confirmBox = document.getElementById('registro-confirm');
+      confirmBox.style.display = 'block';
+      confirmBox.innerHTML = `<strong>🎉 ¡Registro completado, ${nombre}!</strong> Te sumaste a <em>Mente Digital</em> con el enfoque: <strong>${habito}</strong>.`;
+
+      const list = document.getElementById('registered-list');
+      const item = document.createElement('div');
+      item.className = 'registered-item';
+      item.innerHTML = `
+        <span><strong style="color:var(--verde-pastel);">${nombre}</strong> (${correo}) · <em>${rol}</em></span>
+        <span style="color:var(--amarillo-pastel); font-weight:700;">Meta: ${habito}</span>
+      `;
+      list.prepend(item);
+
+      setProgress(100, 'registro');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
