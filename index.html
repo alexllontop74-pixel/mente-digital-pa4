@@ -35,692 +35,1022 @@
       overflow-x: hidden;
     }
 
-    /* Barra de progreso superior fija */
+    /* Barra de progreso de lectura / recorrido */
     .progress-wrapper {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 200;
+      z-index: 1000;
       background: rgba(9, 9, 11, 0.92);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--negro-borde);
+      padding: 0.55rem 1.5rem 0.7rem;
+    }
+
+    .progress-top {
+      max-width: 1120px;
+      margin: 0 auto 0.45rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      color: var(--verde-pastel);
+      letter-spacing: 0.3px;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--amarillo-pastel);
+      box-shadow: 0 0 10px var(--amarillo-pastel);
+    }
+
+    .progress-status {
+      color: var(--amarillo-pastel);
+      font-weight: 600;
     }
 
     .progress-track {
-      width: 100%;
-      height: 6px;
-      background: #18181b;
+      max-width: 1120px;
+      margin: 0 auto;
+      height: 7px;
+      background: #1f1f23;
+      border-radius: 999px;
+      overflow: hidden;
     }
 
     .progress-fill {
       height: 100%;
-      width: 20%;
+      width: 12%;
       background: linear-gradient(90deg, var(--verde-pastel), var(--amarillo-pastel));
-      transition: width 0.35s ease;
+      border-radius: 999px;
+      transition: width 0.25s ease;
     }
 
-    .nav-bar {
-      max-width: 1140px;
-      margin: auto;
-      padding: 0.85rem 1.5rem;
+    /* Navegación */
+    nav.quick-nav {
+      max-width: 1120px;
+      margin: 4.5rem auto 0;
+      padding: 1rem 1.5rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--texto);
-    }
-
-    .brand strong {
-      display: block;
-      font-size: 1.1rem;
-      color: var(--verde-pastel);
-      letter-spacing: 0.5px;
-    }
-
-    .brand span {
-      font-size: 0.72rem;
-      color: var(--amarillo-pastel);
-      font-weight: 700;
-      text-transform: uppercase;
+      gap: 0.8rem;
     }
 
     .nav-links {
       display: flex;
+      gap: 0.6rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
     }
 
     .nav-links a {
       text-decoration: none;
-      color: var(--texto);
+      color: var(--texto-tenue);
       font-size: 0.88rem;
-      font-weight: 600;
-      padding: 0.4rem 0.75rem;
+      padding: 0.4rem 0.85rem;
       border-radius: 999px;
-      border: 1px solid transparent;
+      border: 1px solid var(--negro-borde);
       transition: all 0.2s;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
+    .nav-links a:hover {
+      color: var(--negro);
+      background: var(--verde-pastel);
       border-color: var(--verde-pastel);
-      background: rgba(167, 243, 208, 0.12);
-      color: var(--verde-pastel);
+      font-weight: 600;
     }
 
-    .progress-badge {
+    .sim-cta-top {
+      text-decoration: none;
       background: var(--amarillo-pastel);
       color: var(--negro);
-      font-weight: 800;
-      font-size: 0.78rem;
-      padding: 0.35rem 0.75rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.48rem 1rem;
       border-radius: 999px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .sim-cta-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(254, 240, 138, 0.25);
+    }
+
+    /* Contenedor general */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.5rem;
     }
 
     /* Hero */
     .hero {
-      padding: 7.5rem 1.5rem 4rem;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(167, 243, 208, 0.14), transparent 45%),
-        radial-gradient(circle at 85% 30%, rgba(254, 240, 138, 0.14), transparent 45%),
-        var(--negro);
-      border-bottom: 1px solid var(--negro-borde);
-    }
-
-    .hero-inner {
-      max-width: 980px;
-      margin: auto;
-      text-align: center;
+      margin-top: 1rem;
+      background: radial-gradient(circle at top right, rgba(167, 243, 208, 0.14), transparent 45%),
+                  radial-gradient(circle at bottom left, rgba(254, 240, 138, 0.12), transparent 45%),
+                  var(--negro-suave);
+      border: 1px solid var(--negro-borde);
+      border-radius: 24px;
+      padding: 3rem 2.2rem;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 2rem;
+      align-items: center;
     }
 
     .pill {
       display: inline-block;
-      background: rgba(167, 243, 208, 0.15);
+      background: rgba(167, 243, 208, 0.14);
       color: var(--verde-pastel);
-      border: 1px solid rgba(167, 243, 208, 0.4);
-      padding: 0.35rem 1rem;
+      border: 1px solid rgba(167, 243, 208, 0.35);
+      padding: 0.35rem 0.9rem;
       border-radius: 999px;
       font-size: 0.82rem;
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: 1rem;
     }
 
     .hero h1 {
-      font-size: clamp(2.1rem, 4.8vw, 3.3rem);
+      font-size: clamp(2rem, 4vw, 3.1rem);
       line-height: 1.15;
       margin-bottom: 1rem;
+      color: #ffffff;
     }
 
-    .hero h1 .verde { color: var(--verde-pastel); }
-    .hero h1 .amarillo { color: var(--amarillo-pastel); }
+    .hero h1 span.green {
+      color: var(--verde-pastel);
+    }
+
+    .hero h1 span.yellow {
+      color: var(--amarillo-pastel);
+    }
 
     .hero p {
-      max-width: 720px;
-      margin: 0 auto 2rem;
       color: var(--texto-tenue);
       font-size: 1.05rem;
+      margin-bottom: 1.6rem;
+      max-width: 60ch;
     }
 
-    .btn-group {
+    .hero-actions {
       display: flex;
       gap: 0.9rem;
-      justify-content: center;
       flex-wrap: wrap;
     }
 
-    .btn {
-      padding: 0.85rem 1.5rem;
-      border-radius: 12px;
-      font-weight: 800;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: transform 0.15s, opacity 0.2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-verde {
+    .btn-primary {
       background: var(--verde-pastel);
       color: var(--negro);
+      border: none;
+      padding: 0.85rem 1.4rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: transform 0.2s, background 0.2s;
     }
 
-    .btn-amarillo {
-      background: var(--amarillo-pastel);
-      color: var(--negro);
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #6ee7b7;
     }
 
-    .btn-outline {
+    .btn-secondary {
       background: transparent;
-      color: var(--texto);
+      color: var(--amarillo-pastel);
+      border: 1px solid rgba(254, 240, 138, 0.45);
+      padding: 0.85rem 1.4rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(254, 240, 138, 0.12);
+    }
+
+    .hero-card {
+      background: var(--negro);
       border: 1px solid var(--negro-borde);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .hero-card h3 {
+      color: var(--amarillo-pastel);
+      font-size: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid #1f1f23;
+      font-size: 0.92rem;
+    }
+
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+
+    .metric-tag-green {
+      background: rgba(167, 243, 208, 0.15);
+      color: var(--verde-pastel);
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .metric-tag-yellow {
+      background: rgba(254, 240, 138, 0.15);
+      color: var(--amarillo-pastel);
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
     }
 
     /* Secciones */
-    section {
-      max-width: 1140px;
-      margin: auto;
-      padding: 4.5rem 1.5rem;
-      border-bottom: 1px solid var(--negro-borde);
+    section.block {
+      margin-top: 2.5rem;
+      background: var(--negro-suave);
+      border: 1px solid var(--negro-borde);
+      border-radius: 24px;
+      padding: 2.2rem;
     }
 
     .section-head {
-      margin-bottom: 2.2rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       flex-wrap: wrap;
       gap: 1rem;
+      margin-bottom: 1.6rem;
     }
 
     .section-head h2 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-size: 1.65rem;
       color: var(--verde-pastel);
     }
 
     .section-head p {
       color: var(--texto-tenue);
-      max-width: 620px;
-      margin-top: 0.35rem;
+      font-size: 0.95rem;
+      max-width: 62ch;
     }
 
-    .step-tag {
+    .step-badge {
       background: var(--amarillo-pastel);
       color: var(--negro);
       font-weight: 800;
-      font-size: 0.8rem;
-      padding: 0.35rem 0.8rem;
-      border-radius: 8px;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    /* Pilares */
+    /* Tarjetas de enfoque */
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 1.4rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
     }
 
     .card {
-      background: var(--negro-suave);
+      background: var(--negro);
       border: 1px solid var(--negro-borde);
       border-radius: 18px;
-      padding: 1.6rem;
+      padding: 1.4rem;
+      transition: border-color 0.2s, transform 0.2s;
     }
 
-    .card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
+    .card:hover {
+      border-color: var(--verde-pastel);
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      margin-bottom: 0.9rem;
+      font-size: 1.1rem;
+    }
+
+    .icon-green {
+      background: rgba(167, 243, 208, 0.16);
+      color: var(--verde-pastel);
+    }
+
+    .icon-yellow {
+      background: rgba(254, 240, 138, 0.16);
       color: var(--amarillo-pastel);
     }
 
-    /* Imagen y Galería conectada */
-    .media-layout {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.6rem;
-      align-items: start;
+    .card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
     }
 
-    .visual-frame {
-      background: var(--negro-suave);
-      border: 1px solid var(--negro-borde);
-      border-radius: 18px;
-      padding: 1.2rem;
+    .card p {
+      font-size: 0.92rem;
+      color: var(--texto-tenue);
     }
 
-    .visual-frame img,
-    .visual-frame video {
-      width: 100%;
-      border-radius: 12px;
-      display: block;
-      background: #000;
-    }
-
-    .selector-pills {
+    /* Galería / Multimedia conectada */
+    .media-controls {
       display: flex;
+      gap: 0.7rem;
       flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.3rem;
     }
 
-    .pill-btn {
-      padding: 0.55rem 1rem;
-      border-radius: 10px;
-      border: 1px solid var(--negro-borde);
+    .tab-btn {
       background: var(--negro);
       color: var(--texto);
-      font-weight: 700;
+      border: 1px solid var(--negro-borde);
+      padding: 0.6rem 1.1rem;
+      border-radius: 12px;
       cursor: pointer;
-      font-size: 0.88rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
     }
 
-    .pill-btn.active {
+    .tab-btn.active {
       background: var(--verde-pastel);
       color: var(--negro);
       border-color: var(--verde-pastel);
     }
 
-    /* Reto interactivo */
-    .choice-grid {
+    .media-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-      margin-top: 1.2rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      align-items: stretch;
     }
 
-    .choice-btn {
-      text-align: left;
-      padding: 1.1rem;
-      border-radius: 14px;
-      border: 1px solid var(--negro-borde);
+    .media-box {
       background: var(--negro);
-      color: var(--texto);
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .choice-btn:hover {
-      border-color: var(--amarillo-pastel);
-      background: rgba(254, 240, 138, 0.08);
-    }
-
-    .feedback-box {
-      margin-top: 1.2rem;
-      padding: 1.1rem 1.3rem;
-      border-radius: 12px;
-      background: rgba(167, 243, 208, 0.12);
-      border-left: 4px solid var(--verde-pastel);
-      display: none;
-    }
-
-    /* Registro */
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-
-    .field {
+      border: 1px solid var(--negro-borde);
+      border-radius: 18px;
+      padding: 1.2rem;
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      justify-content: space-between;
     }
 
-    .field label {
+    .media-box h4 {
+      color: var(--amarillo-pastel);
+      margin-bottom: 0.8rem;
+      font-size: 0.98rem;
+    }
+
+    .poster-frame {
+      width: 100%;
+      min-height: 290px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #102a22, #18181b 55%, #2b2610);
+      border: 1px dashed rgba(167, 243, 208, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .poster-frame img {
+      width: 100%;
+      height: auto;
+      max-height: 360px;
+      object-fit: contain;
+      display: block;
+      background: #f6f5ef;
+    }
+
+    .poster-fallback {
+      padding: 1.2rem;
+    }
+
+    .poster-fallback strong {
+      display: block;
+      color: var(--amarillo-pastel);
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .poster-fallback span {
+      color: var(--texto-tenue);
       font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--verde-pastel);
+      display: block;
     }
 
-    .field input,
-    .field select {
-      padding: 0.8rem 0.95rem;
-      border-radius: 10px;
+    .video-embed-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 290px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
       border: 1px solid var(--negro-borde);
+    }
+
+    .video-embed-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .media-toolbar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.9rem;
+      align-items: center;
+    }
+
+    .mini-btn {
+      background: var(--verde-pastel);
+      color: var(--negro);
+      border: none;
+      padding: 0.5rem 0.95rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .mini-btn-outline {
+      background: transparent;
+      color: var(--amarillo-pastel);
+      border: 1px solid rgba(254, 240, 138, 0.45);
+      padding: 0.5rem 0.95rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .media-note {
+      margin-top: 0.65rem;
+      font-size: 0.82rem;
+      color: var(--texto-tenue);
+    }
+
+    /* Mini-evaluación rápida de hábitos */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .quiz-item {
       background: var(--negro);
-      color: var(--texto);
+      border: 1px solid var(--negro-borde);
+      border-radius: 16px;
+      padding: 1.2rem;
+    }
+
+    .quiz-item p {
+      font-weight: 600;
+      margin-bottom: 0.8rem;
       font-size: 0.95rem;
     }
 
-    .field input:focus,
-    .field select:focus {
-      outline: none;
+    .choice-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .choice-btn {
+      background: #1c1c21;
+      color: var(--texto);
+      border: 1px solid var(--negro-borde);
+      padding: 0.48rem 0.85rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .choice-btn.selected-good {
+      background: var(--verde-pastel);
+      color: var(--negro);
+      border-color: var(--verde-pastel);
+      font-weight: 700;
+    }
+
+    .choice-btn.selected-warn {
+      background: var(--amarillo-pastel);
+      color: var(--negro);
       border-color: var(--amarillo-pastel);
+      font-weight: 700;
     }
 
-    .registro-confirm {
-      margin-top: 1.3rem;
-      padding: 1.2rem;
+    .feedback-banner {
+      margin-top: 1.2rem;
+      padding: 1rem 1.2rem;
       border-radius: 14px;
-      background: rgba(254, 240, 138, 0.14);
-      border: 1px solid var(--amarillo-pastel);
-      color: var(--amarillo-pastel);
-      display: none;
+      background: rgba(167, 243, 208, 0.1);
+      border: 1px solid rgba(167, 243, 208, 0.35);
+      color: var(--verde-pastel);
+      font-size: 0.94rem;
     }
 
-    .registered-list {
-      margin-top: 1.5rem;
+    /* Formulario de registro */
+    .form-layout {
       display: grid;
-      gap: 0.7rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.6rem;
     }
 
-    .registered-item {
+    form.reg-form {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--amarillo-pastel);
+      margin-bottom: 0.35rem;
+      font-weight: 600;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      background: var(--negro);
+      color: var(--texto);
+      border: 1px solid var(--negro-borde);
+      border-radius: 12px;
+      padding: 0.72rem 0.9rem;
+      font-size: 0.93rem;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--verde-pastel);
+    }
+
+    .ticket-card {
       background: var(--negro);
       border: 1px solid var(--negro-borde);
-      padding: 0.85rem 1.1rem;
-      border-radius: 12px;
+      border-radius: 18px;
+      padding: 1.4rem;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    }
+
+    .ticket-card h3 {
+      color: var(--verde-pastel);
+      margin-bottom: 0.6rem;
+    }
+
+    .ticket-preview {
+      background: #121216;
+      border: 1px dashed rgba(254, 240, 138, 0.45);
+      border-radius: 14px;
+      padding: 1rem;
+      margin: 0.8rem 0;
       font-size: 0.9rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 2.2rem 1rem;
+    .ticket-preview p {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Simulador banner final */
+    .sim-banner {
+      margin-top: 2.5rem;
+      background: linear-gradient(120deg, rgba(167, 243, 208, 0.16), rgba(254, 240, 138, 0.16)),
+                  var(--negro-suave);
+      border: 1px solid rgba(167, 243, 208, 0.4);
+      border-radius: 24px;
+      padding: 2.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .sim-banner h2 {
+      color: #ffffff;
+      font-size: 1.55rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .sim-banner p {
       color: var(--texto-tenue);
-      font-size: 0.88rem;
+      max-width: 58ch;
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 2rem auto 3rem;
+      padding: 0 1.5rem;
+      text-align: center;
+      color: var(--texto-tenue);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .grid-3,
+      .media-grid,
+      .quiz-grid,
+      .form-layout {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- BARRA DE PROGRESO Y NAVEGACIÓN CONECTADA -->
+  <!-- Barra de progreso interactiva -->
   <div class="progress-wrapper">
-    <div class="nav-bar">
-      <a href="#inicio" class="brand" onclick="setProgress(20, 'inicio')">
-        <!-- Logo SVG Mente Digital -->
-        <svg width="42" height="42" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="14" fill="#18181B" stroke="#A7F3D0" stroke-width="2"/>
-          <path d="M31 16C23.5 16 18 21.2 18 28C18 30.8 19 33.4 20.7 35.4C19.6 37.1 19 39.1 19 41.2C19 46.6 23.4 50 28.8 50H31V16Z" stroke="#FEF08A" stroke-width="2.6" fill="rgba(254,240,138,0.16)"/>
-          <path d="M33 16C40.5 16 46 21.2 46 28C46 30.8 45 33.4 43.3 35.4C44.4 37.1 45 39.1 45 41.2C45 46.6 40.6 50 35.2 50H33V16Z" stroke="#A7F3D0" stroke-width="2.6" fill="rgba(167,243,208,0.16)"/>
-          <path d="M32 16V9" stroke="#A7F3D0" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M32 11C32 8 36 7 38 9C36 11 33 11 32 11Z" fill="#A7F3D0"/>
-        </svg>
-        <div>
-          <strong>MENTE DIGITAL</strong>
-          <span>Usa la IA sin perder tu esencia</span>
-        </div>
-      </a>
-
-      <nav class="nav-links">
-        <a href="#inicio" class="nav-link active" data-sec="inicio" onclick="setProgress(20, 'inicio')">1. Inicio</a>
-        <a href="#pilares" class="nav-link" data-sec="pilares" onclick="setProgress(40, 'pilares')">2. Pilares</a>
-        <a href="#multimedia" class="nav-link" data-sec="multimedia" onclick="setProgress(60, 'multimedia')">3. Imagen y Video</a>
-        <a href="#reto" class="nav-link" data-sec="reto" onclick="setProgress(80, 'reto')">4. Dilema IA</a>
-        <a href="#registro" class="nav-link" data-sec="registro" onclick="setProgress(100, 'registro')">5. Registro</a>
-        <span class="progress-badge" id="progress-label">Progreso: 20%</span>
-      </nav>
+    <div class="progress-top">
+      <div class="brand-badge">
+        <span class="brand-dot"></span>
+        <span>MENTE DIGITAL · PA4</span>
+      </div>
+      <div class="progress-status" id="progressText">Progreso de exploración: 15% · Inicio</div>
     </div>
     <div class="progress-track">
-      <div class="progress-fill" id="progress-fill"></div>
+      <div class="progress-fill" id="progressFill"></div>
     </div>
   </div>
 
-  <!-- 1. INICIO -->
-  <header class="hero" id="inicio">
-    <div class="hero-inner">
-      <div class="pill">PROYECTO SOCIAL · SALUD MENTAL Y USO RESPONSABLE DE LA IA</div>
-      <h1><span class="verde">Tecnología que te impulsa,</span> <span class="amarillo">no que te domina.</span></h1>
-      <p>
-        Campaña educativa para estudiantes de educación superior: aprende a usar la inteligencia artificial como apoyo académico y creativo sin descuidar tu bienestar emocional, tu criterio ni tu descanso.
-      </p>
-      <div class="btn-group">
-        <a href="#multimedia" class="btn btn-verde" onclick="setProgress(60, 'multimedia')">Ver Imagen y Video</a>
-        <a href="#reto" class="btn btn-amarillo" onclick="setProgress(80, 'reto')">Jugar Dilema Interactivo</a>
-        <a href="#registro" class="btn btn-outline" onclick="setProgress(100, 'registro')">Registrarme en la Campaña</a>
-      </div>
+  <!-- Navegación rápida -->
+  <nav class="quick-nav">
+    <div class="nav-links">
+      <a href="#proposito">1. Propósito</a>
+      <a href="#galeria">2. Afiche y Video</a>
+      <a href="#autodiagnostico">3. Autodiagnóstico</a>
+      <a href="#registro">4. Registro</a>
     </div>
-  </header>
+    <a class="sim-cta-top" href="simulador-mente-digital.html">Ir al Simulador 3D →</a>
+  </nav>
 
-  <!-- 2. PILARES -->
-  <section id="pilares">
-    <div class="section-head">
+  <main class="container">
+    <!-- Hero -->
+    <header class="hero" data-step="1">
       <div>
-        <h2>Pilares de Mente Digital</h2>
-        <p>La IA es una herramienta, no un reemplazo. Tu bienestar también es productividad.</p>
-      </div>
-      <span class="step-tag">PASO 2 DE 5</span>
-    </div>
-
-    <div class="grid-3">
-      <div class="card">
-        <h3>🌱 Autocuidado</h3>
-        <p>Cuida tu sueño, haz pausas lejos de las pantallas y evita el tecnoestrés. Ninguna entrega vale más que tu salud mental.</p>
-      </div>
-      <div class="card">
-        <h3>⚖️ Equilibrio</h3>
-        <p>Usa la IA para organizar ideas y estudiar con intención, sin caer en la dependencia ni compararte con resultados ajenos.</p>
-      </div>
-      <div class="card">
-        <h3>🧭 Autonomía</h3>
-        <p>Piensa primero, formula tus propias preguntas, contrasta información con fuentes confiables y explica lo aprendido con tus palabras.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. SECCIÓN CONECTADA: IMAGEN DEL PROYECTO + REPRODUCTOR DE VIDEO -->
-  <section id="multimedia">
-    <div class="section-head">
-      <div>
-        <h2>Galería Visual y Video del Proyecto</h2>
-        <p>Cambia entre las vistas conectadas para inspeccionar la imagen del proyecto y reproducir el video de campaña.</p>
-      </div>
-      <span class="step-tag">PASO 3 DE 5</span>
-    </div>
-
-    <div class="selector-pills">
-      <button class="pill-btn active" onclick="switchMedia('afiche', this)">🖼️ Imagen del Proyecto</button>
-      <button class="pill-btn" onclick="switchMedia('video', this)">🎬 Reproducir Video</button>
-      <button class="pill-btn" onclick="switchMedia('ambos', this)">⚡ Ver Ambos Juntos</button>
-    </div>
-
-    <div class="media-layout" id="media-container">
-      <!-- Tarjeta de Imagen conectada -->
-      <div class="visual-frame" id="box-afiche">
-        <p style="font-size:0.85rem; color:var(--verde-pastel); font-weight:700; margin-bottom:0.6rem;">
-          AFICHE / PIEZA GRÁFICA: MENTE DIGITAL
+        <span class="pill">Campaña de Bienestar Emocional y Uso Consciente de IA</span>
+        <h1>
+          <span class="green">Mente Digital:</span> Usa la IA sin perder <span class="yellow">tu esencia</span>
+        </h1>
+        <p>
+          Una iniciativa creada para ayudar a estudiantes a aprovechar la inteligencia artificial como aliada de aprendizaje, evitando la dependencia cognitiva, el tecnoestrés y la ansiedad académica.
         </p>
-        <!-- Coloca tu imagen en la misma carpeta con el nombre "afiche-mente-digital.jpg" o ".png" -->
-        <img
-          id="project-image"
-          src="afiche-mente-digital.png"
-          alt="Afiche del proyecto Mente Digital: Tecnología que te impulsa, no que te domina"
-          onerror="this.style.display='none'; document.getElementById('img-fallback').style.display='block';"
-        />
-        <div id="img-fallback" style="display:none; padding:1.5rem; background:#09090b; border:1px dashed var(--amarillo-pastel); border-radius:12px;">
-          <strong style="color:var(--amarillo-pastel);">Vista previa conectada — Mente Digital</strong>
-          <p style="font-size:0.88rem; color:var(--texto-tenue); margin-top:0.4rem;">
-            "Tecnología que te impulsa, no que te domina. Usamos la IA con conciencia para aprender, crear y crecer con autonomía."
-          </p>
-          <p style="font-size:0.78rem; color:var(--verde-pastel); margin-top:0.6rem;">
-            Tip: Guarda tu imagen junto a este HTML como <code>afiche-mente-digital.png</code> para que aparezca automáticamente aquí.
-          </p>
+        <div class="hero-actions">
+          <a href="#galeria" class="btn-primary">Explorar Afiche y Video</a>
+          <a href="simulador-mente-digital.html" class="btn-secondary">Probar Simulador Interactivo 3D</a>
         </div>
       </div>
 
-      <!-- Tarjeta de Reproductor de Video -->
-      <div class="visual-frame" id="box-video">
-        <p style="font-size:0.85rem; color:var(--amarillo-pastel); font-weight:700; margin-bottom:0.6rem;">
-          REPRODUCTOR DE VIDEO · CAMPAÑA MENTE DIGITAL
-        </p>
-        <!-- Coloca tu video en la misma carpeta como "video-mente-digital.mp4" o carga uno desde tu PC -->
-        <video id="project-video" controls preload="metadata">
-          <source src="video-mente-digital.mp4" type="video/mp4" />
-          Tu navegador no soporta la reproducción de video HTML5.
-        </video>
-
-        <div style="margin-top:0.9rem; display:flex; flex-wrap:wrap; gap:0.6rem; align-items:center;">
-          <button class="btn btn-verde" style="padding:0.5rem 1rem; font-size:0.85rem;" onclick="toggleVideoPlay()">▶ / ⏸ Play-Pausa</button>
-          <label class="btn btn-outline" style="padding:0.5rem 1rem; font-size:0.85rem; cursor:pointer;">
-            📂 Cargar video local
-            <input type="file" accept="video/*" style="display:none;" onchange="loadLocalVideo(event)" />
-          </label>
+      <aside class="hero-card">
+        <h3>Claves del Proyecto Mente Digital</h3>
+        <div class="metric-row">
+          <span>Enfoque principal</span>
+          <span class="metric-tag-green">Autonomía + Bienestar</span>
         </div>
-        <p style="font-size:0.78rem; color:var(--texto-tenue); margin-top:0.5rem;">
-          Puedes subir <code>video-mente-digital.mp4</code> a tu repositorio o seleccionar cualquier video desde tu dispositivo.
-        </p>
-      </div>
-    </div>
-  </section>
+        <div class="metric-row">
+          <span>Riesgo prevenido</span>
+          <span class="metric-tag-yellow">Dependencia y Tecnoestrés</span>
+        </div>
+        <div class="metric-row">
+          <span>Herramienta práctica</span>
+          <span class="metric-tag-green">Simulador 3D de Hábitos</span>
+        </div>
+        <div class="metric-row">
+          <span>Regla de oro</span>
+          <span class="metric-tag-yellow">Pensar antes de consultar</span>
+        </div>
+      </aside>
+    </header>
 
-  <!-- 4. DILEMA INTERACTIVO -->
-  <section id="reto">
-    <div class="section-head">
-      <div>
-        <h2>Dilema Interactivo: ¿Pienso primero o consulto la IA?</h2>
-        <p>Elige una opción y observa cómo impacta en tu autonomía y bienestar estudiantil.</p>
+    <!-- Sección 1: Propósito -->
+    <section class="block" id="proposito" data-step="2">
+      <div class="section-head">
+        <div>
+          <h2>¿Por qué hablar de salud mental e IA?</h2>
+          <p>El uso equilibrado de herramientas digitales fortalece tu criterio propio en lugar de reemplazarlo.</p>
+        </div>
+        <span class="step-badge">Paso 2 de 5</span>
       </div>
-      <span class="step-tag">PASO 4 DE 5</span>
-    </div>
 
-    <div class="card">
-      <h3 id="dilema-pregunta">Situación: Tienes un trabajo de investigación y dudas sobre cómo empezar.</h3>
-      <div class="choice-grid">
-        <button class="choice-btn" onclick="responderDilema('A')">
-          <strong>Opción A</strong>
-          <p style="font-size:0.88rem; color:var(--texto-tenue); margin-top:0.3rem;">
-            Pido a la IA que haga todo el texto de inmediato para terminar rápido.
-          </p>
-        </button>
-        <button class="choice-btn" onclick="responderDilema('B')">
-          <strong>Opción B</strong>
-          <p style="font-size:0.88rem; color:var(--texto-tenue); margin-top:0.3rem;">
-            Anoto mis propias ideas primero, pido pistas a la IA y verifico las fuentes.
-          </p>
-        </button>
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-icon icon-green">01</div>
+          <h3>Socio Digital, no Muleta</h3>
+          <p>La IA potencia tu aprendizaje cuando primero redactas tus propias ideas y luego la usas para contrastar, mejorar y profundizar.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon icon-yellow">02</div>
+          <h3>Criterio Crítico Activo</h3>
+          <p>Verificar fuentes y cuestionar respuestas reduce errores académicos y fortalece tu seguridad intelectual.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon icon-green">03</div>
+          <h3>Desconexión y Calma</h3>
+          <p>Establecer pausas lejos de la pantalla protege el sueño, la concentración y tus vínculos humanos reales.</p>
+        </article>
       </div>
-      <div class="feedback-box" id="dilema-respuesta"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 5. REGISTRO INTERACTIVO -->
-  <section id="registro">
-    <div class="section-head">
-      <div>
-        <h2>Registro a la Comunidad Mente Digital</h2>
-        <p>Regístrate para sumarte a la campaña y guardar tu compromiso de uso responsable de la IA.</p>
+    <!-- Sección 2: Galería Visual y Video Permanente -->
+    <section class="block" id="galeria" data-step="3">
+      <div class="section-head">
+        <div>
+          <h2>Galería Visual y Video del Proyecto</h2>
+          <p>Cambia entre las vistas conectadas para inspeccionar el afiche oficial y reproducir el video de campaña.</p>
+        </div>
+        <span class="step-badge">Paso 3 de 5</span>
       </div>
-      <span class="step-tag">PASO 5 DE 5</span>
-    </div>
 
-    <div class="card">
-      <form id="registro-form" onsubmit="registrarUsuario(event)">
-        <div class="form-grid">
-          <div class="field">
-            <label for="reg-nombre">Nombre completo *</label>
-            <input type="text" id="reg-nombre" placeholder="Ej. Alexandra Llontop" required />
+      <div class="media-controls">
+        <button class="tab-btn active" type="button" onclick="setMediaView('both', this)">⚡ Ver Ambos Juntos</button>
+        <button class="tab-btn" type="button" onclick="setMediaView('image', this)">🖼️ Solo Afiche</button>
+        <button class="tab-btn" type="button" onclick="setMediaView('video', this)">🎬 Solo Video</button>
+      </div>
+
+      <div class="media-grid">
+        <!-- Tarjeta Afiche -->
+        <div class="media-box" id="imageBox">
+          <div>
+            <h4>AFICHE / PIEZA GRÁFICA: MENTE DIGITAL</h4>
+            <div class="poster-frame">
+              <img
+                id="posterImg"
+                src="afiche-mente-digital.png"
+                alt="Afiche Mente Digital: Usa la IA con Conciencia y Autonomía"
+                onerror="handlePosterFallback(this)"
+              />
+              <div class="poster-fallback" id="posterFallback" style="display:none;">
+                <strong>Vista previa — Mente Digital</strong>
+                <span>"Tecnología que te impulsa, no que te domina. Usamos la IA con conciencia para aprender, crear y crecer con autonomía."</span>
+              </div>
+            </div>
           </div>
-          <div class="field">
-            <label for="reg-correo">Correo institucional o personal *</label>
-            <input type="email" id="reg-correo" placeholder="ejemplo@correo.com" required />
+
+          <div>
+            <div class="media-toolbar">
+              <a class="mini-btn" href="afiche-mente-digital.png" target="_blank" rel="noopener">🔍 Abrir afiche completo</a>
+            </div>
+            <p class="media-note">Pieza gráfica oficial de la campaña Mente Digital.</p>
           </div>
+        </div>
+
+        <!-- Tarjeta Video Permanente desde Google Drive -->
+        <div class="media-box" id="videoBox">
+          <div>
+            <h4>REPRODUCTOR DE VIDEO · CAMPAÑA MENTE DIGITAL</h4>
+            <div class="video-embed-frame">
+              <iframe
+                src="https://drive.google.com/file/d/1LvVHhbBXMmSV-vpNLQ49wg-TMCQy18K8/preview"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                title="Video de campaña Mente Digital">
+              </iframe>
+            </div>
+          </div>
+
+          <div>
+            <div class="media-toolbar">
+              <a class="mini-btn-outline" href="https://drive.google.com/file/d/1LvVHhbBXMmSV-vpNLQ49wg-TMCQy18K8/view?usp=drive_link" target="_blank" rel="noopener">↗ Ver en Google Drive</a>
+            </div>
+            <p class="media-note">Video integrado permanentemente en la página web del proyecto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 3: Autodiagnóstico -->
+    <section class="block" id="autodiagnostico" data-step="4">
+      <div class="section-head">
+        <div>
+          <h2>Autodiagnóstico Rápido de Equilibrio Digital</h2>
+          <p>Selecciona cómo sueles actuar al estudiar para recibir una recomendación personalizada al instante.</p>
+        </div>
+        <span class="step-badge">Paso 4 de 5</span>
+      </div>
+
+      <div class="quiz-grid">
+        <div class="quiz-item">
+          <p>1. Cuando tienes una tarea difícil, ¿qué haces primero?</p>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="selectHabit(1, 'good', this)">Hago mi propio esquema primero</button>
+            <button type="button" class="choice-btn" onclick="selectHabit(1, 'warn', this)">Pido que la IA lo haga todo</button>
+          </div>
+        </div>
+
+        <div class="quiz-item">
+          <p>2. Cuando recibes una respuesta de la IA, ¿cómo procedes?</p>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="selectHabit(2, 'good', this)">Contrasto con fuentes y la adapto</button>
+            <button type="button" class="choice-btn" onclick="selectHabit(2, 'warn', this)">Copio y pego sin revisar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedback-banner" id="habitFeedback">
+        Responde ambas preguntas para evaluar tu nivel de autonomía digital.
+      </div>
+    </section>
+
+    <!-- Sección 4: Formulario de Registro -->
+    <section class="block" id="registro" data-step="5">
+      <div class="section-head">
+        <div>
+          <h2>Únete al Compromiso Mente Digital</h2>
+          <p>Registra tu compromiso personal para mantener un uso saludable y consciente de la inteligencia artificial.</p>
+        </div>
+        <span class="step-badge">Paso 5 de 5</span>
+      </div>
+
+      <div class="form-layout">
+        <form class="reg-form" id="commitmentForm" onsubmit="submitCommitment(event)">
           <div class="field">
-            <label for="reg-rol">Perfil</label>
-            <select id="reg-rol">
-              <option value="Estudiante de Educación Superior">Estudiante de Educación Superior</option>
-              <option value="Docente / Mentor">Docente / Mentor</option>
-              <option value="Colaborador de la Campaña">Colaborador de la Campaña</option>
+            <label for="studentName">Nombre completo</label>
+            <input type="text" id="studentName" required placeholder="Ej. Alexandra Llontop" />
+          </div>
+
+          <div class="field">
+            <label for="studentCareer">Carrera o área de estudio</label>
+            <input type="text" id="studentCareer" required placeholder="Ej. Recursos Humanos / Administración" />
+          </div>
+
+          <div class="field">
+            <label for="habitGoal">Hábito saludable que aplicarás esta semana</label>
+            <select id="habitGoal" required>
+              <option value="Pensar y redactar mi borrador antes de consultar a la IA">Pensar y redactar mi borrador antes de consultar a la IA</option>
+              <option value="Verificar cada dato generado con fuentes académicas reales">Verificar cada dato generado con fuentes académicas reales</option>
+              <option value="Aplicar pausas activas de 10 minutos lejos de pantallas">Aplicar pausas activas de 10 minutos lejos de pantallas</option>
             </select>
           </div>
-          <div class="field">
-            <label for="reg-habito">Hábito que quieres fortalecer</label>
-            <select id="reg-habito">
-              <option value="Pensar antes de consultar la IA">Pensar antes de consultar la IA</option>
-              <option value="Verificar fuentes confiables">Verificar fuentes confiables</option>
-              <option value="Cuidar horas de sueño y pausas">Cuidar horas de sueño y pausas</option>
-            </select>
+
+          <button type="submit" class="btn-primary">Generar Constancia de Compromiso</button>
+        </form>
+
+        <div class="ticket-card">
+          <div>
+            <h3>Tu Credencial Mente Digital</h3>
+            <p style="color: var(--texto-tenue); font-size: 0.9rem;">Al completar el formulario se actualizará tu constancia digital.</p>
+            <div class="ticket-preview" id="ticketPreview">
+              <p><strong>Participante:</strong> Pendiente de registro</p>
+              <p><strong>Área:</strong> —</p>
+              <p><strong>Compromiso activo:</strong> Usa la IA con conciencia y autonomía</p>
+              <p><strong>Estado:</strong> Listo para activar</p>
+            </div>
           </div>
+          <a href="simulador-mente-digital.html" class="btn-secondary" style="justify-content:center;">Continuar al Simulador 3D →</a>
         </div>
+      </div>
+    </section>
 
-        <button type="submit" class="btn btn-verde" style="margin-top:1.3rem;">Completar Registro</button>
-      </form>
-
-      <div class="registro-confirm" id="registro-confirm"></div>
-      <div class="registered-list" id="registered-list"></div>
-    </div>
-  </section>
+    <!-- Banner final -->
+    <section class="sim-banner">
+      <div>
+        <h2>¿Listo para poner a prueba tus decisiones en 3D?</h2>
+        <p>Explora el entorno interactivo de <strong>Mente Digital</strong> y observa cómo tus hábitos impactan tu energía mental, autonomía y bienestar.</p>
+      </div>
+      <a href="simulador-mente-digital.html" class="btn-primary">Abrir Simulador 3D Ahora →</a>
+    </section>
+  </main>
 
   <footer>
-    Proyecto Social <strong>Mente Digital</strong> · Usa la IA sin perder tu esencia · NRC 3813[cite: 3, 4]
+    Proyecto Académico PA4 · Mente Digital: Usa la IA sin perder tu esencia
   </footer>
 
   <script>
-    function setProgress(percent, secId) {
-      document.getElementById('progress-fill').style.width = percent + '%';
-      document.getElementById('progress-label').textContent = 'Progreso: ' + percent + '%';
+    // Barra de progreso dinámica al hacer scroll
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(12, Math.round((scrollTop / docHeight) * 100))) : 100;
 
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.dataset.sec === secId);
-      });
-    }
+      document.getElementById('progressFill').style.width = pct + '%';
 
-    function switchMedia(mode, btn) {
-      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+      let stage = 'Inicio';
+      if (pct >= 25 && pct < 50) stage = 'Propósito';
+      else if (pct >= 50 && pct < 75) stage = 'Afiche y Video';
+      else if (pct >= 75 && pct < 92) stage = 'Autodiagnóstico';
+      else if (pct >= 92) stage = 'Registro completado';
 
-      const afiche = document.getElementById('box-afiche');
-      const video = document.getElementById('box-video');
+      document.getElementById('progressText').textContent = `Progreso de exploración: ${pct}% · ${stage}`;
+    });
 
-      if (mode === 'afiche') {
-        afiche.style.display = 'block';
-        video.style.display = 'none';
-      } else if (mode === 'video') {
-        afiche.style.display = 'none';
-        video.style.display = 'block';
+    // Alternar vista de multimedia
+    function setMediaView(mode, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const imageBox = document.getElementById('imageBox');
+      const videoBox = document.getElementById('videoBox');
+
+      if (mode === 'both') {
+        imageBox.style.display = 'flex';
+        videoBox.style.display = 'flex';
+      } else if (mode === 'image') {
+        imageBox.style.display = 'flex';
+        videoBox.style.display = 'none';
       } else {
-        afiche.style.display = 'block';
-        video.style.display = 'block';
+        imageBox.style.display = 'none';
+        videoBox.style.display = 'flex';
       }
-      setProgress(60, 'multimedia');
     }
 
-    function toggleVideoPlay() {
-      const vid = document.getElementById('project-video');
-      if (vid.paused) {
-        vid.play().catch(() => {});
+    // Respaldo automático si el archivo tiene doble extensión en el repositorio
+    let posterTriedDouble = false;
+    function handlePosterFallback(img) {
+      if (!posterTriedDouble) {
+        posterTriedDouble = true;
+        img.src = 'afiche-mente-digital.png.png';
       } else {
-        vid.pause();
+        img.style.display = 'none';
+        document.getElementById('posterFallback').style.display = 'block';
       }
     }
 
-    function loadLocalVideo(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const vid = document.getElementById('project-video');
-      vid.src = URL.createObjectURL(file);
-      vid.play().catch(() => {});
-    }
+    // Autodiagnóstico
+    const answers = {};
+    function selectHabit(q, type, btn) {
+      answers[q] = type;
+      const siblings = btn.parentElement.querySelectorAll('.choice-btn');
+      siblings.forEach(s => s.classList.remove('selected-good', 'selected-warn'));
+      btn.classList.add(type === 'good' ? 'selected-good' : 'selected-warn');
 
-    function responderDilema(opcion) {
-      const box = document.getElementById('dilema-respuesta');
-      box.style.display = 'block';
-      if (opcion === 'A') {
-        box.style.borderLeftColor = 'var(--amarillo-pastel)';
-        box.innerHTML = `<strong style="color:var(--amarillo-pastel);">⚠️ Atención a la dependencia:</strong> Delegar todo el proceso puede generar inseguridad sobre tus propias capacidades y dejar errores sin detectar.`;
-      } else {
-        box.style.borderLeftColor = 'var(--verde-pastel)';
-        box.innerHTML = `<strong style="color:var(--verde-pastel);">✅ Uso responsable y autónomo:</strong> Mantienes tu criterio, usas la IA como apoyo y fortaleces tu aprendizaje real.`;
+      const banner = document.getElementById('habitFeedback');
+      if (answers[1] && answers[2]) {
+        if (answers[1] === 'good' && answers[2] === 'good') {
+          banner.textContent = '¡Excelente! Usas la IA como un socio digital consciente manteniendo tu criterio y autonomía.';
+        } else {
+          banner.textContent = 'Alerta de hábito: intenta redactar tu propia idea primero y verificar siempre los datos para evitar dependencia.';
+        }
       }
-      setProgress(80, 'reto');
     }
 
-    function registrarUsuario(e) {
+    // Registro
+    function submitCommitment(e) {
       e.preventDefault();
-      const nombre = document.getElementById('reg-nombre').value.trim();
-      const correo = document.getElementById('reg-correo').value.trim();
-      const rol = document.getElementById('reg-rol').value;
-      const habito = document.getElementById('reg-habito').value;
+      const name = document.getElementById('studentName').value.trim();
+      const career = document.getElementById('studentCareer').value.trim();
+      const goal = document.getElementById('habitGoal').value;
 
-      const confirmBox = document.getElementById('registro-confirm');
-      confirmBox.style.display = 'block';
-      confirmBox.innerHTML = `<strong>🎉 ¡Registro completado, ${nombre}!</strong> Te sumaste a <em>Mente Digital</em> con el enfoque: <strong>${habito}</strong>.`;
-
-      const list = document.getElementById('registered-list');
-      const item = document.createElement('div');
-      item.className = 'registered-item';
-      item.innerHTML = `
-        <span><strong style="color:var(--verde-pastel);">${nombre}</strong> (${correo}) · <em>${rol}</em></span>
-        <span style="color:var(--amarillo-pastel); font-weight:700;">Meta: ${habito}</span>
+      document.getElementById('ticketPreview').innerHTML = `
+        <p><strong>Participante:</strong> ${name}</p>
+        <p><strong>Área:</strong> ${career}</p>
+        <p><strong>Compromiso activo:</strong> ${goal}</p>
+        <p style="color:#a7f3d0;"><strong>Estado:</strong> ✔ Constancia registrada con éxito</p>
       `;
-      list.prepend(item);
-
-      setProgress(100, 'registro');
-      e.target.reset();
     }
   </script>
 </body>
