@@ -439,42 +439,30 @@
 
     .poster-frame {
       width: 100%;
+      aspect-ratio: 16 / 9;
       min-height: 290px;
       border-radius: 14px;
       overflow: hidden;
-      background: linear-gradient(135deg, #102a22, #18181b 55%, #2b2610);
-      border: 1px dashed rgba(167, 243, 208, 0.4);
+      background: #f6f5ef;
+      border: 1px solid var(--negro-borde);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      text-align: center;
     }
 
     .poster-frame img {
       width: 100%;
-      height: auto;
-      max-height: 360px;
+      height: 100%;
       object-fit: contain;
       display: block;
-      background: #f6f5ef;
     }
 
-    .poster-fallback {
-      padding: 1.2rem;
-    }
-
-    .poster-fallback strong {
-      display: block;
-      color: var(--amarillo-pastel);
-      font-size: 1.05rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .poster-fallback span {
-      color: var(--texto-tenue);
-      font-size: 0.88rem;
-      display: block;
+    .poster-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: none;
     }
 
     .video-embed-frame {
@@ -806,7 +794,7 @@
       </div>
     </section>
 
-    <!-- Sección 2: Galería Visual y Video Permanente -->
+    <!-- Sección 2: Galería Visual y Video Permanente desde Google Drive -->
     <section class="block" id="galeria" data-step="3">
       <div class="section-head">
         <div>
@@ -823,29 +811,30 @@
       </div>
 
       <div class="media-grid">
-        <!-- Tarjeta Afiche -->
+        <!-- Tarjeta Afiche conectado a Google Drive -->
         <div class="media-box" id="imageBox">
           <div>
             <h4>AFICHE / PIEZA GRÁFICA: MENTE DIGITAL</h4>
             <div class="poster-frame">
               <img
                 id="posterImg"
-                src="afiche-mente-digital.png"
+                src="https://drive.google.com/thumbnail?id=1_VUiuGqdXCb_DLbafENVFHr4k3CTn22h&sz=w1600"
                 alt="Afiche Mente Digital: Usa la IA con Conciencia y Autonomía"
-                onerror="handlePosterFallback(this)"
+                onerror="switchPosterToPreview()"
               />
-              <div class="poster-fallback" id="posterFallback" style="display:none;">
-                <strong>Vista previa — Mente Digital</strong>
-                <span>"Tecnología que te impulsa, no que te domina. Usamos la IA con conciencia para aprender, crear y crecer con autonomía."</span>
-              </div>
+              <iframe
+                id="posterIframe"
+                src="https://drive.google.com/file/d/1_VUiuGqdXCb_DLbafENVFHr4k3CTn22h/preview"
+                title="Afiche Mente Digital">
+              </iframe>
             </div>
           </div>
 
           <div>
             <div class="media-toolbar">
-              <a class="mini-btn" href="afiche-mente-digital.png" target="_blank" rel="noopener">🔍 Abrir afiche completo</a>
+              <a class="mini-btn" href="https://drive.google.com/file/d/1_VUiuGqdXCb_DLbafENVFHr4k3CTn22h/view?usp=sharing" target="_blank" rel="noopener">🔍 Abrir afiche completo</a>
             </div>
-            <p class="media-note">Pieza gráfica oficial de la campaña Mente Digital.</p>
+            <p class="media-note">Pieza gráfica oficial integrada desde Google Drive.</p>
           </div>
         </div>
 
@@ -959,99 +948,3 @@
     <!-- Banner final -->
     <section class="sim-banner">
       <div>
-        <h2>¿Listo para poner a prueba tus decisiones en 3D?</h2>
-        <p>Explora el entorno interactivo de <strong>Mente Digital</strong> y observa cómo tus hábitos impactan tu energía mental, autonomía y bienestar.</p>
-      </div>
-      <a href="simulador-mente-digital.html" class="btn-primary">Abrir Simulador 3D Ahora →</a>
-    </section>
-  </main>
-
-  <footer>
-    Proyecto Académico PA4 · Mente Digital: Usa la IA sin perder tu esencia
-  </footer>
-
-  <script>
-    // Barra de progreso dinámica al hacer scroll
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = docHeight > 0 ? Math.min(100, Math.max(12, Math.round((scrollTop / docHeight) * 100))) : 100;
-
-      document.getElementById('progressFill').style.width = pct + '%';
-
-      let stage = 'Inicio';
-      if (pct >= 25 && pct < 50) stage = 'Propósito';
-      else if (pct >= 50 && pct < 75) stage = 'Afiche y Video';
-      else if (pct >= 75 && pct < 92) stage = 'Autodiagnóstico';
-      else if (pct >= 92) stage = 'Registro completado';
-
-      document.getElementById('progressText').textContent = `Progreso de exploración: ${pct}% · ${stage}`;
-    });
-
-    // Alternar vista de multimedia
-    function setMediaView(mode, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const imageBox = document.getElementById('imageBox');
-      const videoBox = document.getElementById('videoBox');
-
-      if (mode === 'both') {
-        imageBox.style.display = 'flex';
-        videoBox.style.display = 'flex';
-      } else if (mode === 'image') {
-        imageBox.style.display = 'flex';
-        videoBox.style.display = 'none';
-      } else {
-        imageBox.style.display = 'none';
-        videoBox.style.display = 'flex';
-      }
-    }
-
-    // Respaldo automático si el archivo tiene doble extensión en el repositorio
-    let posterTriedDouble = false;
-    function handlePosterFallback(img) {
-      if (!posterTriedDouble) {
-        posterTriedDouble = true;
-        img.src = 'afiche-mente-digital.png.png';
-      } else {
-        img.style.display = 'none';
-        document.getElementById('posterFallback').style.display = 'block';
-      }
-    }
-
-    // Autodiagnóstico
-    const answers = {};
-    function selectHabit(q, type, btn) {
-      answers[q] = type;
-      const siblings = btn.parentElement.querySelectorAll('.choice-btn');
-      siblings.forEach(s => s.classList.remove('selected-good', 'selected-warn'));
-      btn.classList.add(type === 'good' ? 'selected-good' : 'selected-warn');
-
-      const banner = document.getElementById('habitFeedback');
-      if (answers[1] && answers[2]) {
-        if (answers[1] === 'good' && answers[2] === 'good') {
-          banner.textContent = '¡Excelente! Usas la IA como un socio digital consciente manteniendo tu criterio y autonomía.';
-        } else {
-          banner.textContent = 'Alerta de hábito: intenta redactar tu propia idea primero y verificar siempre los datos para evitar dependencia.';
-        }
-      }
-    }
-
-    // Registro
-    function submitCommitment(e) {
-      e.preventDefault();
-      const name = document.getElementById('studentName').value.trim();
-      const career = document.getElementById('studentCareer').value.trim();
-      const goal = document.getElementById('habitGoal').value;
-
-      document.getElementById('ticketPreview').innerHTML = `
-        <p><strong>Participante:</strong> ${name}</p>
-        <p><strong>Área:</strong> ${career}</p>
-        <p><strong>Compromiso activo:</strong> ${goal}</p>
-        <p style="color:#a7f3d0;"><strong>Estado:</strong> ✔ Constancia registrada con éxito</p>
-      `;
-    }
-  </script>
-</body>
-</html>
